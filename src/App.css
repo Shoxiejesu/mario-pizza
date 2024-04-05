@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+}
+
+main {
+  padding: 2.5em 0.5em;
+}
+
+header.css-1r11njw-MuiPaper-root-MuiAppBar-root,
+footer {
+  background-color: rgb(111, 106, 185);
+  color: #fff;
+  width: 100%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0px -2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px -4px 5px 0px rgba(0, 0, 0, 0.14), 0px -1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.pokemonSearch {
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 1) 15%
+  );
+  position: fixed;
+  top: 2.9em;
+  padding: 0.5em 0 1em;
+  z-index: 1000;
+  width: 100%;
+}

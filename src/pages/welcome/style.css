@@ -1,0 +1,6 @@
+.welcome {
+  max-height: 60vh;
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+}

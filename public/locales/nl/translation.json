@@ -1,0 +1,47 @@
+{
+  "common": {
+    "add": "pizza toevoegen",
+    "welcome": "Welkom"
+  },
+ 
+  "pizza": {
+    "1": "Margherita",
+    "2": "4 kazen",
+    "3": "Plattelandsmeisje",
+    "4": "Geit Honing",
+    "5": "Chicken Barbecue",
+    "6": "Hawaïaans",
+    "7": "Noords",
+    "8": "oosters",
+    "9": "Pepperoni",
+    "10": "Koningin",
+    "11": "Texaanse barbecue",
+    "12": "Vegetarisch"
+    
+  },
+  "description": {
+    "1": "Tomatensaus met oregano en mozzarella",
+    "2": "Tomatensaus met oregano of lichte crème fraîche, mozzarella, geitenkaas, Emmentaler en Fourme d'Ambert AOP",
+    "3": "Lichte crème fraîche, mozzarella, spek, verse rode uien en verse champignons",
+    "4": "Lichte crème fraîche, mozzarella, geitenkaas, honing",
+    "5": "Barbecuesaus, mozzarella, gebraden kip, verse rode uien, verse champignons en verse groene paprika",
+    "6": "Tomatensaus met oregano, mozzarella, ham en ananas",
+    "7": "Lichte crème fraîche, mozzarella en Noorse gerookte zalm",
+    "8": "Tomatensaus met oregano, mozzarella, merguez en verse champignons",
+    "9": "Tomatensaus met oregano, mozzarella en pepperoniworst",
+    "10": "Tomatensaus met oregano, mozzarella, ham en verse champignons",
+    "11": "Barbecuesaus, mozzarella, ham, runderkruimels, spek, verse champignons en verse rode uien.",
+    "12": "Tomatensaus met oregano, mozzarella, verse champignons, verse rode uien, verse groene paprika, verse tomaten en zwarte olijven"
+  
+  },
+  "error": {
+    "minLen": "at least {{field}} characters",
+    "required": "{{field}} is required",
+    "minValue": "must be greater or equals to {{value}}",
+    "maxValue": "must be lower or equals to {{value}}",
+    "atLeast_one": "at least {{count}} item",
+    "noMoreThan_one": "no more than {{count}} item",
+    "atLeast_other": "at least {{count}} items",
+    "noMoreThan_other": "no more than {{count}} items"
+  }
+}
