@@ -1,7 +1,9 @@
 {
   "common": {
     "add": "pizza toevoegen",
-    "welcome": "Welkom"
+    "welcome": "Welkom",
+    "connect": "Verbinding"
+
   },
  
   "pizza": {

@@ -1,7 +1,9 @@
 {
   "common": {
     "add": "selectionner",
-    "welcome": "Bienvenue"
+    "welcome": "Bienvenue",
+    "connect": "Connexion"
+
 
   },
  

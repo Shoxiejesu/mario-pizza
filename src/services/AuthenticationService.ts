@@ -27,6 +27,8 @@ export default class AuthenticationService {
     return new Promise((resolve) => resolve(this.isAuthenticated()));
   }
 
+
+  
   static logout(): void {
     localStorage.removeItem("jwt");
     localStorage.removeItem("expiration");
