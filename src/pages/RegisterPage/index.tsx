@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import './style.css'; 
 import UsersService from '../../services/UsersService';
+import User_rolesService from '../../services/User_rolesService';
 
 
 interface MarkedPosition {
@@ -51,7 +52,13 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
       const savedUsers = await UsersService.save(newUsers);
 
       
-
+      const userRole = {
+        user_id: savedUsers.id,
+        role_id: 1, // Supposons que 1 est l'ID du rôle que vous souhaitez assigner
+      };
+  
+      // Enregistrer le rôle de l'utilisateur
+      const savedUserRole = await User_rolesService.save(userRole);
       
       console.log('Client enregistré avec succès:', savedUsers);
     } catch (error) {
