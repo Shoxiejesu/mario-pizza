@@ -23,7 +23,7 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
   
 
   const [lastUsersId, setLastUsersId] = useState<number>(() => {
-    const storedUsersId = localStorage.getItem('lastClientId');
+    const storedUsersId = localStorage.getItem('lastUsersId');
     return storedUsersId ? parseInt(storedUsersId) : 2; 
   });
   
@@ -48,20 +48,22 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
         address: usersAddress, 
       };
 
-      // Appeler la méthode save du service Client pour enregistrer le nouveau client
       const savedUsers = await UsersService.save(newUsers);
 
-      
       const userRole = {
         user_id: savedUsers.id,
-        role_id: 1, // Supposons que 1 est l'ID du rôle que vous souhaitez assigner
+        role_id: 1, 
       };
-  
-      // Enregistrer le rôle de l'utilisateur
       const savedUserRole = await User_rolesService.save(userRole);
+
+
+
+      alert('Inscription réussie! Vous allez être redirigé vers la liste des pizzas.');
+      window.location.href = '/PizzaListPage';
       
-      console.log('Client enregistré avec succès:', savedUsers);
-    } catch (error) {
+
+      
+      localStorage.setItem('loggedInUser', JSON.stringify(savedUsers));    } catch (error) {
       console.error('Erreur lors de l\'enregistrement du client:', error);
     }
   };
