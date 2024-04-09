@@ -137,3 +137,21 @@ body {
   transform: translate(3px, 3px);
   box-shadow: 0px 0px var(--main-color);
 }
+
+.cart-details {
+  font-size: 12px; /* Définir la taille de la police pour les détails du panier */
+}
+
+.cart-details h4 {
+  font-size: 19px; /* Définir la taille de la police pour les titres h4 */
+}
+
+
+.cart-details {
+  opacity: 0; /* Par défaut, le détail du panier est invisible */
+  transition: opacity 0.3s ease; /* Ajoute une transition pour l'opacité */
+}
+
+.show-cart-details {
+  opacity: 1; /* Lorsque la classe show-cart-details est ajoutée, le détail du panier devient visible */
+}

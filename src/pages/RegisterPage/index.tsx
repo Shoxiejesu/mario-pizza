@@ -7,6 +7,7 @@ import User_rolesService from '../../services/User_rolesService';
 import { t } from 'i18next';
 
 
+
 interface MarkedPosition {
   x: number;
   y: number;
@@ -39,6 +40,8 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
   const handleSaveUsers = async () => {
     try {
       const newUsersId = generateUsersId();
+      
+
 
       const newUsers = {
         id: newUsersId,
