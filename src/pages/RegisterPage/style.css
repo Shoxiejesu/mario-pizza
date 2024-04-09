@@ -1,0 +1,80 @@
+.register {
+  width: 25em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 1.5em;
+  transform: translate(-50%, -50%);
+  border-radius: 1em !important;
+  background-color: #3b438b;
+  color: white;
+  font-family: "Arial", sans-serif; /* Changer la police de caractères */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Stronger elevation effect */
+
+}
+
+.register form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 20em;
+  margin: auto;
+}
+
+/* Style pour les champs de formulaire */
+.register input[type="text"],
+.register input[type="password"],
+.register button {
+  padding: 0.6em;
+  border: none;
+  border-radius: 0.5em;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Style pour les effets de survol */
+.register input[type="text"]:hover,
+.register input[type="password"]:hover,
+.register button:hover {
+  background-color: #5c639f; /* Couleur de fond au survol */
+  color: #fbc02c; /* Couleur du texte au survol */
+  cursor: pointer;
+}
+
+.register .button-container {
+  margin-top: 15px; /* Ajouter une marge en haut */
+}
+
+
+/* style.css */
+
+/* Container styling */
+.table-container.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Input field styling */
+.table-cell form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+/* Input field hover effect */
+.table-cell form input:hover {
+  border-color: #007bff;
+}
+
+/* Placeholder styling */
+.table-cell form input::placeholder {
+  color: #888; /* Default placeholder color */
+}
+
+/* Placeholder hover effect */
+.table-cell form input:hover::placeholder {
+  color: #fbc02c; /* Change placeholder color on hover */
+}

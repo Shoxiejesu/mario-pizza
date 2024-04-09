@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import './style.css'; 
 import UsersService from '../../services/UsersService';
 import User_rolesService from '../../services/User_rolesService';
+import { t } from 'i18next';
 
 
 interface MarkedPosition {
@@ -76,27 +77,23 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
           
 
 
-      <div className="table-container">
-      <p className="Informations">Fiche informations </p>
+      <div className="table-container register">
 
         
 
           <div className="table-cell">
-            <h2>Inscription</h2>
             <form>
-              <label>Numéro de Téléphone  :</label>
-              <input type="text" value={usersUsername} onChange={(e) => setUsersUsername(e.target.value)} />
-              <label>Mot de passe  :</label>
-              <input type="text" value={usersPassword} onChange={(e) => setUsersPassword(e.target.value)} />
-              <label>Prénom :</label>
-              <input type="contact2" value={usersFirstname} onChange={(e) => setUsersFirstname(e.target.value)} />
-              <label>Nom :</label>
-              <input type="numeropermis" value={usersLastname} onChange={(e) => setUsersLastname(e.target.value)} />
-              <label>Adresse :</label>
-              <input type="numeropermis" value={usersAddress} onChange={(e) => setUsersAddress(e.target.value)} />
+              <input placeholder={t("common.loginPlaceholder")} type="text" value={usersUsername} onChange={(e) => setUsersUsername(e.target.value)} />
+              <input placeholder={t("common.passwordPlaceholder")} type="text" value={usersPassword} onChange={(e) => setUsersPassword(e.target.value)} />
+              <input placeholder={t("common.firstnamePlaceholder")} type="text" value={usersFirstname} onChange={(e) => setUsersFirstname(e.target.value)} />
+              <input  placeholder={t("common.lastnamePlaceholder")} type="text" value={usersLastname} onChange={(e) => setUsersLastname(e.target.value)} />
+              <input placeholder={t("common.addressPlaceholder")} type="text" value={usersAddress} onChange={(e) => setUsersAddress(e.target.value)} />
             </form>
           </div>
-          <button onClick={handleSaveUsers}>Enregistrer le client</button>
+          <div className="button-container">
+
+          <button onClick={handleSaveUsers}>{t("common.registervalide")}</button>
+          </div>
 
     </div>
   );

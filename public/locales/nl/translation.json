@@ -2,7 +2,18 @@
   "common": {
     "add": "pizza toevoegen",
     "welcome": "Welkom",
-    "connect": "Verbinding"
+    "connect": "Verbinding",
+    "register": "account aanmaken",
+    "loginError": "Verbindingsfout",
+    "loginPlaceholder": "TELEFOONNUUMER VEREIST",
+    "passwordPlaceholder": "WATCHWOORD",
+    "firstnamePlaceholder": "VOORNAAM",
+    "lastnamePlaceholder": "NAAM",
+    "addressPlaceholder": "ADRES",
+    "registervalide": "Register"
+
+
+
 
   },
  

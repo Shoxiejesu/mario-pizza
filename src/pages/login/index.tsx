@@ -1,11 +1,13 @@
-import { Button, Card, InputAdornment, TextField, Typography } from "@mui/material";
+// Login.js
+import React from "react";
+import { Button, Card, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { KeyOutlined, LoginOutlined } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import * as yup from "yup";
 import AuthenticationService from "../../services/AuthenticationService";
 
+import "./style.css"; // Importer le fichier CSS pour les styles
 
 interface Props {
   setIsAuthenticated: (value: boolean) => void;
@@ -42,15 +44,11 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
     },
   });
 
-  // Fonction de redirection vers la page d'inscription
   const redirectToRegisterPage = () => {
-    // Appeler la fonction de connexion automatique ici
     handleAutomaticLogin();
-    
     onRegisterClick();
   };
 
-  // Fonction pour la connexion automatique
   const handleAutomaticLogin = () => {
     AuthenticationService.login("0782104455", "yanni12345").then((response) => {
       setIsAuthenticated(response);
@@ -58,19 +56,15 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
     });
   };
 
- 
-  
-
   return (
-    <Card className="login" elevation={10}>
+    <div className="login-container">
       {error && <Typography color="red">{t("common.loginError")}</Typography>}
-      <form onSubmit={formik.handleSubmit}>
+      <form className="login-form" onSubmit={formik.handleSubmit}>
         <TextField
           placeholder={t("common.loginPlaceholder")}
           type="text"
-          InputProps={{
-            startAdornment: <InputAdornment position="start"><LoginOutlined /></InputAdornment>,
-          }}
+          InputLabelProps={{ style: { color: 'white' } }}
+          InputProps={{ style: { color: 'white' } }}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.login}
@@ -81,9 +75,8 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
         <TextField
           placeholder={t("common.passwordPlaceholder")}
           type="password"
-          InputProps={{
-            startAdornment: <InputAdornment position="start"><KeyOutlined /></InputAdornment>,
-          }}
+          InputLabelProps={{ style: { color: 'white', background: 'white' } }}
+          InputProps={{ style: { color: 'white' } }}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
@@ -91,10 +84,11 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button variant="contained" type="submit">{t("common.connect")}</Button>
-        <Button variant="contained" onClick={redirectToRegisterPage}>{t("common.register")}</Button>
+        <Button variant="contained" onClick={redirectToRegisterPage} className="register-button">{t("common.register")}</Button>
+
+        <Button variant="contained" type="submit" className="connect-button">{t("common.connect")}</Button>
       </form>
-    </Card>
+    </div>
   );
 };
 

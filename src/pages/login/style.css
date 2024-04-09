@@ -1,17 +1,46 @@
-.login {
+/* Login.css */
+.login-container {
   width: 25em;
   position: absolute;
   top: 50%;
   left: 50%;
-  padding: 0.5em;
+  padding: 1.5em;
   transform: translate(-50%, -50%);
   border-radius: 1em !important;
+  background-color: #3b438b;
+  color: white;
+  font-family: "Arial", sans-serif; /* Changer la police de caractères */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Stronger elevation effect */
 }
 
-.login form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 1em;
   max-width: 20em;
   margin: auto;
+}
+
+.connect-button {
+  background-color: #fbc02c;
+  color: #5c639f;
+}
+
+.register-button {
+  background-color: transparent;
+  color: white;
+  font-size: 12px;
+  color: #fbc02c;
+  margin-top: 10px; /* Ajouter un espacement en haut */
+  align-self: flex-end; /* Aligner le bouton à droite */
+}
+
+/* Style pour les placeholders */
+input ::placeholder {
+  color: #ffffff; /* Couleur par défaut du placeholder */
+}
+
+/* Style pour les effets de survol sur les placeholders */
+input:hover::placeholder {
+  color: #fbc02c; /* Modifier la couleur du placeholder au survol */
 }

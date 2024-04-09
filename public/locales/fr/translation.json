@@ -1,10 +1,21 @@
 {
   "common": {
     "add": "selectionner",
-    "welcome": "Bienvenue",
-    "connect": "Connexion"
+    "welcome": "Benvenuto chez Mario's Pizza, cliquez ici pour voir nos séléctions de pizza delizioso ! ",
+    "connect": "Connexion",
+    "registervalide": "S'inscrire",
+    "loginError": "erreur de connexion",
+    "loginPlaceholder": "TELEPHONE",
+    "passwordPlaceholder": "MOT DE PASSE",
+    "firstnamePlaceholder": "PRENOM",
+    "lastnamePlaceholder": "NOM",
+    "addressPlaceholder": "ADRESSE",
+    "register": "créer un compte"
 
 
+
+
+    
   },
  
   "pizza": {

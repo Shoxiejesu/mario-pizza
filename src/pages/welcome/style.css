@@ -1,6 +1,22 @@
-.welcome {
-  max-height: 60vh;
-  position: absolute;
-  bottom: 2em;
-  right: 2em;
+/* style.css */
+
+/* Enlever le soulignement des liens */
+a {
+  text-decoration: none;
+}
+
+/* Enlever la couleur par défaut des liens */
+a:link,
+a:visited {
+  color: inherit;
+}
+
+/* Style pour le texte de bienvenue */
+.welcome-text {
+  font-family: "Arial", sans-serif; /* Changer la police */
+  font-size: 24px; /* Taille de police plus petite */
+  text-align: center; /* Centrer le texte */
+  margin-top: 30px; /* Espacement par rapport au haut */
+  color: #666; /* Couleur du texte plus subtile */
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1); /* Ombre portée légère */
 }
