@@ -50,7 +50,7 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
   };
 
   const handleAutomaticLogin = () => {
-    AuthenticationService.login("0782104455", "yanni12345").then((response) => {
+    AuthenticationService.login("User d'inscription", "yanni12345").then((response) => {
       setIsAuthenticated(response);
       setError(!response);
     });

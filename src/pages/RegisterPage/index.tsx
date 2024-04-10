@@ -39,6 +39,11 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
 
   const handleSaveUsers = async () => {
     try {
+      // Vérifier si toutes les informations sont remplies
+      if (!usersUsername || !usersPassword || !usersFirstname || !usersLastname || !usersAddress) {
+        alert('Veuillez remplir toutes les informations pour créer un compte.');
+        return;
+      }
       const newUsersId = generateUsersId();
       
 
