@@ -37,6 +37,7 @@ const App = () => {
             <Route path="/" element={<Welcome />} />
             <Route path="/PizzaListPage" element={<PizzaListPage />} />
             <Route path="/RegisterPage" element={<RegisterPage />} />
+
             <Route path="/PizzaListPage/:filter" element={<PizzaListPage />} />
           </Routes>
         ) : (

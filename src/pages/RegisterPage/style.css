@@ -8,8 +8,8 @@
   border-radius: 1em !important;
   background-color: #3b438b;
   color: white;
-  font-family: "Arial", sans-serif; /* Changer la police de caractères */
-  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Stronger elevation effect */
+  font-family: "Arial", sans-serif; 
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); 
 
 }
 
@@ -21,7 +21,6 @@
   margin: auto;
 }
 
-/* Style pour les champs de formulaire */
 .register input[type="text"],
 .register input[type="password"],
 .register button {
@@ -31,30 +30,26 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Style pour les effets de survol */
 .register input[type="text"]:hover,
 .register input[type="password"]:hover,
 .register button:hover {
-  background-color: #5c639f; /* Couleur de fond au survol */
-  color: #fbc02c; /* Couleur du texte au survol */
+  background-color: #5c639f; 
+  color: #fbc02c; 
   cursor: pointer;
 }
 
 .register .button-container {
-  margin-top: 15px; /* Ajouter une marge en haut */
+  margin-top: 15px; 
 }
 
 
-/* style.css */
 
-/* Container styling */
 .table-container.register {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Input field styling */
 .table-cell form input {
   width: 100%;
   padding: 10px;
@@ -64,17 +59,14 @@
   transition: border-color 0.3s ease;
 }
 
-/* Input field hover effect */
 .table-cell form input:hover {
   border-color: #007bff;
 }
 
-/* Placeholder styling */
 .table-cell form input::placeholder {
-  color: #888; /* Default placeholder color */
+  color: #888; 
 }
 
-/* Placeholder hover effect */
 .table-cell form input:hover::placeholder {
-  color: #fbc02c; /* Change placeholder color on hover */
+  color: #fbc02c; 
 }

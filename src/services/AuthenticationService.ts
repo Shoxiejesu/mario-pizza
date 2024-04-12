@@ -1,5 +1,6 @@
 import Login from "../models/security/LoginRequest";
 import LoginResponse from "../models/security/LoginResponse";
+import Users from "../models/users";
 
 export default class AuthenticationService {
   static async call(login: Login): Promise<LoginResponse | undefined> {
@@ -28,6 +29,19 @@ export default class AuthenticationService {
   }
 
 
+
+
+  static getUserId(): number {
+    const userString = localStorage.getItem("user");
+    if (userString) {
+      const user = JSON.parse(userString);
+      return user.id;
+    }
+    // Gérer le cas où l'ID de l'utilisateur est null
+    throw new Error("User ID not found in local storage");
+  }
+
+
   
   static logout(): void {
     localStorage.removeItem("jwt");
@@ -50,4 +64,10 @@ export default class AuthenticationService {
   static getJwt(): any {
     return localStorage.getItem("jwt");
   }
+
+    // Ajout de la méthode pour récupérer l'utilisateur depuis le local storage
+    static getUserFromLocalStorage(): Users | null {
+      const userString = localStorage.getItem("user");
+      return userString ? JSON.parse(userString) : null;
+    }
 }
