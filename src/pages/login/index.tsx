@@ -1,13 +1,13 @@
-// Login.js
 import React from "react";
-import { Button, Card, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import * as yup from "yup";
 import AuthenticationService from "../../services/AuthenticationService";
+import UsersService from "../../services/UsersService"; // Importer le service UsersService
 
-import "./style.css"; // Importer le fichier CSS pour les styles
+import "./style.css";
 
 interface Props {
   setIsAuthenticated: (value: boolean) => void;
@@ -36,11 +36,42 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
       password: "",
     },
     validationSchema: schema,
-    onSubmit: (values) => {
-      AuthenticationService.login(values.login, values.password).then((response) => {
-        setIsAuthenticated(response);
-        setError(!response);
-      });
+    onSubmit: async (values) => {
+      try {
+        // Authentification de l'utilisateur
+        const response = await AuthenticationService.login(values.login, values.password);
+
+        // Vérification de la réponse pour l'authentification réussie
+        if (response) {
+          // Stockage de l'authentification réussie dans le state
+          setIsAuthenticated(true);
+
+          // Récupération des informations de l'utilisateur à partir du service UsersService
+          const user = await UsersService.getUserByUsername(values.login);
+
+          // Vérification si l'utilisateur existe
+          if (user) {
+            // Stockage de l'ID de l'utilisateur connecté pour l'utiliser dans le save panier plus tard
+            localStorage.setItem('userId', user.id.toString());
+
+            console.log('ID de l\'utilisateur connecté :', user.id);
+
+          
+            console.log('Connexion réussie !');
+          } else {
+            setError(true);
+            console.log('Utilisateur non trouvé.');
+          }
+        } else {
+          
+          setError(true);
+          console.log('La connexion a échoué. Veuillez vérifier vos identifiants.');
+        }
+      } catch (error) {
+        // Gestion des erreurs lors de l'authentification
+        console.error('Erreur lors de la connexion:', error);
+        setError(true);
+      }
     },
   });
 
@@ -49,16 +80,39 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
     onRegisterClick();
   };
 
-  const handleAutomaticLogin = () => {
-    AuthenticationService.login("User d'inscription", "yanni12345").then((response) => {
-      setIsAuthenticated(response);
-      setError(!response);
-    });
+  const handleAutomaticLogin = async () => {
+    try {
+      // Tentative de connexion automatique avec des identifiants prédéfinis
+      const response = await AuthenticationService.login("User d'inscription", "yanni12345");
+
+      // Vérification de la réponse pour l'authentification réussie
+      if (response) {
+        // Récupération des informations de l'utilisateur à partir du service UsersService
+        const user = await UsersService.getUserByUsername("User d'inscription");
+
+        // Vérification si l'utilisateur existe
+        if (user) {
+          // Stockage de l'ID de l'utilisateur dans le local storage
+          localStorage.setItem('userId', user.id.toString());
+          // Affichage d'un message de connexion réussie ou redirection de l'utilisateur
+          console.log('Connexion automatique réussie !');
+        } else {
+          setError(true);
+          console.log('Utilisateur non trouvé.');
+        }
+      } else {
+        setError(true);
+        console.log('La connexion automatique a échoué.');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la connexion automatique:', error);
+      setError(true);
+    }
   };
 
   return (
     <div className="login-container">
-      {error && <Typography color="red">{t("common.loginError")}</Typography>}
+      {error && <Typography color="error">{t("common.loginError")}</Typography>}
       <form className="login-form" onSubmit={formik.handleSubmit}>
         <TextField
           placeholder={t("common.loginPlaceholder")}
@@ -85,7 +139,6 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
           helperText={formik.touched.password && formik.errors.password}
         />
         <Button variant="contained" onClick={redirectToRegisterPage} className="register-button">{t("common.register")}</Button>
-
         <Button variant="contained" type="submit" className="connect-button">{t("common.connect")}</Button>
       </form>
     </div>

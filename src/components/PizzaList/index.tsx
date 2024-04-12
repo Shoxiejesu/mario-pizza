@@ -9,6 +9,9 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import OrderService from '../../services/OrderService';
 import Order from '../../models/order';
 
+import AuthenticationService from '../../services/AuthenticationService';
+
+
 const PizzaListPage: React.FC = () => {
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
   const [selectedPizzas, setSelectedPizzas] = useState<{ [key: number]: number }>({});
@@ -69,40 +72,47 @@ const PizzaListPage: React.FC = () => {
   const handleShowCartDetails = () => {
     setShowCartDetails(!showCartDetails);
   };
+
+  
   const handleSaveOrder = async () => {
     try {
-      // Recuperer date actuel pour l'envoyer 
+      // Utiliser l'ID de l'utilisateur connecté stocké dans le localStorage grace au login
+      const userId = localStorage.getItem('userId');
+  
+      if (!userId) {
+        console.error('ID de l\'utilisateur non trouvé dans le localStorage.');
+        return;
+      }
+  
+      // Récupérer la date actuelle
       const currentDate = new Date();
-      
-      // Format the date viens de stack
       const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')} ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}`;
-      if (userId !== null) {
-
+  
+      // Créer la commande avec l'ID de l'utilisateur connecté
       const order = new Order(
         0,
-        userId,
+        parseInt(userId), 
         formattedDate,
         totalPrice.toFixed(2)
       );
+  
+      // Save la commande
       await OrderService.save(order);
-        setSelectedPizzas({});
-        setCart(0);
-        alert('Commande enregistrée avec succès !');
-      } else {
-        console.error('No user ID available.');
-        alert('Impossible de trouver l\'identifiant de l\'utilisateur.');
-      }
+  
+      // Réinitialiser les pizzas sélectionnées et le total du panier
+      setSelectedPizzas({});
+      setCart(0);
+  
+      // Afficher un message de succès
+      alert('Commande enregistrée avec succès !');
     } catch (error) {
       console.error('Erreur lors de l\'enregistrement de la commande:', error);
+      // Afficher un message d'erreur en cas d'échec de la sauvegarde de la commande
       alert('Une erreur est survenue lors de l\'enregistrement de la commande.');
     }
   };
   
-  const getUserIdFromLocalStorage = () => {
-    const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-    console.log('ID utilisateur récupéré:', user.id);
-    return user.id || -1;
-  };
+  
   
   const totalPrice = Object.entries(selectedPizzas).reduce((acc, [index, quantity]) => {
     const pizza = pizzas[parseInt(index)];
