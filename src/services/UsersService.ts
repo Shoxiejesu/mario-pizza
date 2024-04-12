@@ -1,9 +1,11 @@
 import Users from "../models/users";
 import AuthenticationService from "./AuthenticationService";
 
-// Service class for handling client-related operations
 class UsersService {
  
+
+  // Pour Stocker l'id de l'users connecter dans le local storage au moment du login puis recuperer dans la PizzaList et l'envoyer dans le save order
+
   static async getUserByUsername(username: string): Promise<Users | null> {
     return fetch(`http://localhost:8080/users/${username}`, {
       method: "GET",
