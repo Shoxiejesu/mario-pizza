@@ -37,12 +37,11 @@ const Header = ({ isAuthenticated, setIsAuthenticated }: Props) => {
         alignItems="center"
         margin="0 1em"
       >
-        <NavLink to="/">
+      
           <Box display="flex" alignItems="center">
            
                     <img src="logo.png" alt="Logo" className="logo" />
                     </Box>
-        </NavLink>
               
         <Box
   display="flex"

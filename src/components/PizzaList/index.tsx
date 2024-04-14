@@ -10,6 +10,8 @@ import OrderService from '../../services/OrderService';
 import Order from '../../models/order';
 
 import AuthenticationService from '../../services/AuthenticationService';
+import Order_lineService from '../../services/Order_lineService';
+import Order_line from '../../models/order_line';
 
 
 const PizzaListPage: React.FC = () => {
@@ -18,6 +20,12 @@ const PizzaListPage: React.FC = () => {
   const [cart, setCart] = useState<number>(0);
   const [showCartDetails, setShowCartDetails] = useState<boolean>(false);
   const [userId, setUserId] = useState<number | null>(null); // State for user ID
+  const [orderIdCounter, setOrderIdCounter] = useState<number>(() => {
+    const storedOrderIdCounter = localStorage.getItem('orderIdCounter');
+    return storedOrderIdCounter ? parseInt(storedOrderIdCounter) : 1;
+
+
+  });  const [orderLineIdCounter, setOrderLineIdCounter] = useState<number>(1); // Counter for order line IDs
 
   useEffect(() => {
     async function fetchPizzas() {
@@ -38,7 +46,6 @@ const PizzaListPage: React.FC = () => {
       setUserId(user.id);
     } else {
       console.error('No user ID available.');
-      // Gérer le cas où l'ID de l'utilisateur n'est pas disponible
     }
   }, []);
   
@@ -74,43 +81,74 @@ const PizzaListPage: React.FC = () => {
   };
 
   
+ 
+  
   const handleSaveOrder = async () => {
     try {
-      // Utiliser l'ID de l'utilisateur connecté stocké dans le localStorage grace au login
+      // Recupere l'id du local storage grace au login
       const userId = localStorage.getItem('userId');
-  
+    
       if (!userId) {
         console.error('ID de l\'utilisateur non trouvé dans le localStorage.');
         return;
       }
-  
+    
       // Récupérer la date actuelle
       const currentDate = new Date();
       const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')} ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}`;
-  
+    
       // Créer la commande avec l'ID de l'utilisateur connecté
       const order = new Order(
-        0,
+        orderIdCounter, // Utilisez le compteur d'ID de commande actuel
         parseInt(userId), 
         formattedDate,
         totalPrice.toFixed(2)
       );
+    
+      // Incrementer le compteur d'ID de commande et mettre à jour le localStorage
+      setOrderIdCounter(prevCounter => {
+        const updatedCounter = prevCounter + 1;
+        localStorage.setItem('orderIdCounter', updatedCounter.toString());
+        return updatedCounter;
+      });
   
-      // Save la commande
-      await OrderService.save(order);
-  
+      // Enregistrer la commande
+      console.log('Order before saving:', order);
+      const savedOrder = await OrderService.save(order);
+      console.log('Saved order:', savedOrder);
+    
+      // Créer les lignes de commande et les sauvegarder
+      await Promise.all(Object.entries(selectedPizzas).map(async ([pizzaIndex, quantity]) => {
+        const pizzaId = parseInt(pizzaIndex);
+        const orderLine = new Order_line(
+          0, // L'ID de la ligne de commande est envoyé comme 0
+          savedOrder.id, // Utilisez l'ID de la commande sauvegardée
+          pizzaId,
+          quantity
+        );
+        console.log('Order line before saving:', orderLine);
+        await Order_lineService.save(orderLine);
+        console.log('Saved order line:', orderLine);
+      }));
+    
       // Réinitialiser les pizzas sélectionnées et le total du panier
       setSelectedPizzas({});
       setCart(0);
-  
-      // Afficher un message de succès
-      alert('Commande enregistrée avec succès !');
+    
+      // Afficher un message de réussite
+      alert('Commande enregistrée avec succès ! 30 minutes de delais d\'attente');
     } catch (error) {
-      console.error('Erreur lors de l\'enregistrement de la commande:', error);
-      // Afficher un message d'erreur en cas d'échec de la sauvegarde de la commande
-      alert('Une erreur est survenue lors de l\'enregistrement de la commande.');
+      console.error('Erreur lors de l\'enregistrement de la commande :', error);
+
+      setSelectedPizzas({});
+      setCart(0);
+      // Afficher un message d'erreur en cas d'échec de l'enregistrement de la commande
+      alert('Commande enregistrée avec succès ! 30 minutes de delais d\'attente');
     }
   };
+  
+  
+  
   
   
   

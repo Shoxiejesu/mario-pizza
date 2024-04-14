@@ -2,12 +2,10 @@ import user_roles from "../models/user_roles";
 import User_roles from "../models/user_roles";
 import AuthenticationService from "./AuthenticationService";
 
-// Service class for handling client-related operations
 class User_rolesService {
  
  
  
- // Method to save a new client
  static async save(newUser_roles: User_roles): Promise<User_roles> {
     return fetch(`http://localhost:8080/user_roles/`, {
       method: "POST",

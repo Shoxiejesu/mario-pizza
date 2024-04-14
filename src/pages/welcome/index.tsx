@@ -1,4 +1,3 @@
-// Welcome.js
 import React from "react";
 import { Box, MenuItem, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";

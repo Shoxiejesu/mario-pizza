@@ -82,19 +82,16 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
 
   const handleAutomaticLogin = async () => {
     try {
-      // Tentative de connexion automatique avec des identifiants prédéfinis
+      // Login automatique pour permettre a un nouveau user de push dans la table ses info avec des identifiant temporaire
       const response = await AuthenticationService.login("User d'inscription", "yanni12345");
 
-      // Vérification de la réponse pour l'authentification réussie
       if (response) {
-        // Récupération des informations de l'utilisateur à partir du service UsersService
         const user = await UsersService.getUserByUsername("User d'inscription");
 
         // Vérification si l'utilisateur existe
         if (user) {
-          // Stockage de l'ID de l'utilisateur dans le local storage
+          // On stock l'id  dans le localstorage pour le recuperer dans la pizzalist ensuite
           localStorage.setItem('userId', user.id.toString());
-          // Affichage d'un message de connexion réussie ou redirection de l'utilisateur
           console.log('Connexion automatique réussie !');
         } else {
           setError(true);

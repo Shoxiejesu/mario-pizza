@@ -1,5 +1,3 @@
-// VehiclePage.tsx
-
 import React, { useState } from 'react';
 import './style.css'; 
 import UsersService from '../../services/UsersService';
