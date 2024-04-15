@@ -61,6 +61,7 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
             console.log("ID de l'utilisateur connecté :", user.id);
 
             console.log("Connexion réussie !");
+
           } else {
             setError(true);
             console.log("Utilisateur non trouvé.");
