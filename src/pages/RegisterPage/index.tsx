@@ -77,8 +77,9 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
       window.location.href = "/PizzaListPage";
 
       localStorage.setItem("loggedInUser", JSON.stringify(savedUsers));
-       setUserId(savedUsers.id);
+      setUserId(savedUsers.id);
       localStorage.setItem("userId", savedUsers.id.toString());
+
     } catch (error) {
       console.error("Erreur lors de l'enregistrement du client:", error);
     }
