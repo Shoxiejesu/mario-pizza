@@ -10,8 +10,21 @@ const Welcome = () => {
     <Box>
       <Box role="menubar" display="flex" justifyContent="center">
         <MenuItem>
-          <NavLink to="/PizzaListPage" style={{ textDecoration: "none", color: "inherit" }}>
-            <Typography variant="h2" style={{ fontFamily: "Arial, sans-serif", fontSize: "24px", textAlign: "center", marginTop: "30px", color: "#666", textShadow: "1px 1px 1px rgba(0, 0, 0, 0.1)" }}>
+          <NavLink
+            to="/PizzaListPage"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <Typography
+              variant="h2"
+              style={{
+                fontFamily: "Arial, sans-serif",
+                fontSize: "24px",
+                textAlign: "center",
+                marginTop: "30px",
+                color: "#666",
+                textShadow: "1px 1px 1px rgba(0, 0, 0, 0.1)",
+              }}
+            >
               {t("common.welcome")}
             </Typography>
           </NavLink>

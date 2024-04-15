@@ -2,7 +2,6 @@ import Pizza from "../models/pizza";
 import AuthenticationService from "./AuthenticationService";
 
 class PizzaService {
-  
   static async getAll(): Promise<Pizza[]> {
     return fetch("http://localhost:8080/pizza/", {
       headers: {
@@ -15,8 +14,6 @@ class PizzaService {
         throw error;
       });
   }
-
-  
 }
 
 export default PizzaService;

@@ -18,10 +18,12 @@ const App = () => {
 
   const handleAutomaticLogin = () => {
     if (!isAuthenticated) {
-      AuthenticationService.login("0782104455", "yanni12345").then(response => {
-        setIsAuthenticated(response);
-        navigate("/RegisterPage");
-      });
+      AuthenticationService.login("0782104455", "yanni12345").then(
+        (response) => {
+          setIsAuthenticated(response);
+          navigate("/RegisterPage");
+        }
+      );
     }
   };
 
@@ -41,8 +43,10 @@ const App = () => {
             <Route path="/PizzaListPage/:filter" element={<PizzaListPage />} />
           </Routes>
         ) : (
-          // Assurez-vous que le composant Login accepte onRegisterClick dans ses props
-          <Login setIsAuthenticated={setIsAuthenticated} onRegisterClick={handleAutomaticLogin} />
+          <Login
+            setIsAuthenticated={setIsAuthenticated}
+            onRegisterClick={handleAutomaticLogin}
+          />
         )}
       </main>
       <footer>
