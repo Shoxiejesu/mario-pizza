@@ -1,6 +1,5 @@
 import {
   AppBar,
-  Avatar,
   Box,
   IconButton,
   ToggleButton,
@@ -11,7 +10,6 @@ import { useTranslation } from "react-i18next";
 
 import "./style.css";
 import { Logout } from "@mui/icons-material";
-import { NavLink } from "react-router-dom";
 import AuthenticationService from "../../services/AuthenticationService";
 
 interface Props {
@@ -30,27 +28,35 @@ const Header = ({ isAuthenticated, setIsAuthenticated }: Props) => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#3b438b', top: 0, bottom: 'auto' }}>
-    <Box
+    <AppBar
+      position="fixed"
+      sx={{ backgroundColor: "#3b438b", top: 0, bottom: "auto" }}
+    >
+      <Box
         display="flex"
         justifyContent="space-between"
         alignItems="center"
         margin="0 1em"
       >
-      
-          <Box display="flex" alignItems="center">
-           
-                    <img src="logo.png" alt="Logo" className="logo" />
-                    </Box>
-              
-        <Box
-  display="flex"
-  justifyContent="center"  
-  alignItems="center"      
->
-<Typography variant="h2" sx={{ fontFamily: 'Arial', fontSize: '40px', color: '#fbc02c', textAlign: 'center', fontWeight: 'bold' }}>Mario's Pizza</Typography>
-</Box>
-          
+        <Box display="flex" alignItems="center">
+          <img src="logo.png" alt="Logo" className="logo" />
+        </Box>
+
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Typography
+            variant="h2"
+            sx={{
+              fontFamily: "Arial",
+              fontSize: "40px",
+              color: "#fbc02c",
+              textAlign: "center",
+              fontWeight: "bold",
+            }}
+          >
+            Mario's Pizza
+          </Typography>
+        </Box>
+
         <Box display="flex" alignItems="center" className="menu">
           <Box>
             <ToggleButtonGroup
@@ -59,24 +65,20 @@ const Header = ({ isAuthenticated, setIsAuthenticated }: Props) => {
               size="small"
               onChange={toggleLanguage}
             >
-              <ToggleButton value="fr" >
+              <ToggleButton value="fr">
                 <Typography
                   fontSize="small"
                   sx={{ width: "20px", height: "20px" }}
-                  color= "white"
-
-
+                  color="white"
                 >
                   FR
                 </Typography>
               </ToggleButton>
-              <ToggleButton value="nl"   
->
+              <ToggleButton value="nl">
                 <Typography
                   fontSize="small"
                   sx={{ width: "20px", height: "20px" }}
-                  color= "white"
-
+                  color="white"
                 >
                   NL
                 </Typography>
@@ -96,7 +98,6 @@ const Header = ({ isAuthenticated, setIsAuthenticated }: Props) => {
                   <Logout />
                 </IconButton>
               </Box>
-             
             </>
           )}
         </Box>
