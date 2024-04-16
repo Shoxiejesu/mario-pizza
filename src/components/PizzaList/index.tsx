@@ -107,9 +107,9 @@ const PizzaListPage: React.FC = () => {
         .toString()
         .padStart(2, "0")}`;
 
-      // Créer la commande avec l'ID de l'utilisateur connecté
+      
       const order = new Order(
-        orderIdCounter, // Utilisez le compteur d'ID de commande actuel
+        orderIdCounter, 
         parseInt(userId),
         formattedDate,
         totalPrice.toFixed(2)

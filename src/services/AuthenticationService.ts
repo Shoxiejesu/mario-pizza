@@ -1,3 +1,5 @@
+import SignupRequest from "../models/SignupRequest";
+import SignupResponse from "../models/SignupResponse";
 import Login from "../models/security/LoginRequest";
 import LoginResponse from "../models/security/LoginResponse";
 import Users from "../models/users";
@@ -65,9 +67,28 @@ export default class AuthenticationService {
     return localStorage.getItem("jwt");
   }
 
-    // Ajout de la méthode pour récupérer l'utilisateur depuis le local storage
-    static getUserFromLocalStorage(): Users | null {
+
+  static getUserFromLocalStorage(): Users | null {
       const userString = localStorage.getItem("user");
       return userString ? JSON.parse(userString) : null;
     }
+    static async signup(signupData: SignupRequest): Promise<SignupResponse | null> {
+      try {
+        const response = await fetch("http://localhost:8080/auth/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(signupData),
+        });
+  
+        if (response.ok) {
+          return await response.json();
+        } else {
+          throw new Error("Failed to sign up");
+        }
+      } catch (error) {
+        console.error("Signup error:", error);
+        return null;
+      }
 }
+}
+

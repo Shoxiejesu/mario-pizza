@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Footer from "./components/footer";
 import Header from "./components/header";
@@ -15,17 +15,6 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     AuthenticationService.isAuthenticated()
   );
-
-  const handleAutomaticLogin = () => {
-    if (!isAuthenticated) {
-      AuthenticationService.login("0782104455", "yanni12345").then(
-        (response) => {
-          setIsAuthenticated(response);
-          navigate("/RegisterPage");
-        }
-      );
-    }
-  };
 
   return (
     <div className="App">
@@ -44,9 +33,10 @@ const App = () => {
           </Routes>
         ) : (
           <Login
-            setIsAuthenticated={setIsAuthenticated}
-            onRegisterClick={handleAutomaticLogin}
-          />
+          setIsAuthenticated={setIsAuthenticated}
+          onRegisterClick={() => navigate("/RegisterPage")} // Redirection vers la page d'inscription
+        />
+        
         )}
       </main>
       <footer>
