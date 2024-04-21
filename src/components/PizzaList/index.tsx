@@ -10,7 +10,7 @@ import OrderService from "../../services/OrderService";
 import Order from "../../models/order";
 
 import Order_lineService from "../../services/Order_lineService";
-import Order_line from "../../models/order_line";
+import Order_line from "../../models/OrderLine";
 
 const PizzaListPage: React.FC = () => {
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
@@ -79,81 +79,42 @@ const PizzaListPage: React.FC = () => {
 
   const handleSaveOrder = async () => {
     try {
-      // Recupere l'id du local storage grace au login
-      const userId = localStorage.getItem("userId");
-
-      if (!userId) {
-        console.error("ID de l'utilisateur non trouvé dans le localStorage.");
-        return;
-      }
-
-      // Gerer la date au frontend
-      const currentDate = new Date();
-      const formattedDate = `${currentDate.getFullYear()}-${(
-        currentDate.getMonth() + 1
-      )
-        .toString()
-        .padStart(2, "0")}-${currentDate
-        .getDate()
-        .toString()
-        .padStart(2, "0")} ${currentDate
-        .getHours()
-        .toString()
-        .padStart(2, "0")}:${currentDate
-        .getMinutes()
-        .toString()
-        .padStart(2, "0")}:${currentDate
-        .getSeconds()
-        .toString()
-        .padStart(2, "0")}`;
-
-      
-      const order = new Order(
-        orderIdCounter, 
-        parseInt(userId),
-        formattedDate,
-        totalPrice.toFixed(2)
-      );
-
-      // Incrementer le compteur d'ID de commande et mettre à jour le localStorage
-      setOrderIdCounter((prevCounter) => {
-        const updatedCounter = prevCounter + 1;
-        localStorage.setItem("orderIdCounter", updatedCounter.toString());
-        return updatedCounter;
+      const orderLines = Object.entries(selectedPizzas).map(([pizzaIndex, quantity]) => {
+        return {
+          piz_id: parseInt(pizzaIndex),
+          quantity: quantity
+        };
       });
-
-      // Enregistre la commande
-      console.log("Order before saving:", order);
-      const savedOrder = await OrderService.save(order);
+  
+      const orderData = {
+        total_amount: totalPrice.toFixed(2),
+        orderLines: orderLines
+      };
+  
+      // Enregistrer la commande et les lignes de commande
+      console.log("Order before saving:", orderData);
+      const savedOrder = await OrderService.save(orderData);
       console.log("Saved order:", savedOrder);
-
-      // Méthode save order_line
-      await Promise.all(
-        Object.entries(selectedPizzas).map(async ([pizzaIndex, quantity]) => {
-          const pizzaId = parseInt(pizzaIndex);
-          const orderLine = new Order_line(0, savedOrder.id, pizzaId, quantity);
-          console.log("Order line before saving:", orderLine);
-          await Order_lineService.save(orderLine);
-          console.log("Saved order line:", orderLine);
-        })
-      );
-
+  
+      // Réinitialiser le panier après avoir enregistré la commande
       setSelectedPizzas({});
       setCart(0);
-
-      alert(
-        "Commande enregistrée avec succès ! 30 minutes de delais d'attente"
-      );
+  
+      // Afficher un message de succès
+      alert("Commande enregistrée avec succès ! 30 minutes de délai d'attente");
     } catch (error) {
+      // Gérer les erreurs d'enregistrement de la commande
       console.error("Erreur lors de l'enregistrement de la commande :", error);
-
+  
+      // Réinitialiser le panier en cas d'erreur
       setSelectedPizzas({});
       setCart(0);
-      alert(
-        "Commande enregistrée avec succès ! 30 minutes de delais d'attente"
-      );
+  
+      // Afficher un message d'erreur
+      alert("Erreur lors de l'enregistrement de la commande. Veuillez réessayer.");
     }
   };
+  
 
   const totalPrice = Object.entries(selectedPizzas).reduce(
     (acc, [index, quantity]) => {

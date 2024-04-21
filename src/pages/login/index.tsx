@@ -115,7 +115,8 @@ const Login: React.FC<Props> = ({ setIsAuthenticated, onRegisterClick }) => {
 >
   {t("common.register")}
 </Button>
-        <Button variant="contained"  className="connect-button">
+        <Button variant="contained"    type="submit"
+ className="connect-button">
           {t("common.connect")}
         </Button>
        

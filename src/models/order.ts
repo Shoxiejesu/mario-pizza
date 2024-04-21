@@ -1,21 +1,18 @@
+import OrderLine from "./OrderLine";
+
 export default class Order {
-    id: number;
-    usr_id: number;
-    date: string;
     total_amount: string;
-  
+    orderLines: OrderLine[]; // Lignes de commande associées à la commande
+
   
     constructor(
-      id: number,
-      usr_id: number,
-      date: string,
       total_amount: string,
+      orderLines: OrderLine[],
   
     ) {
-      this.id = id;
-      this.usr_id = usr_id;
-      this.date = date;
       this.total_amount = total_amount;
+      this.orderLines = orderLines;
+
     }
   }
   

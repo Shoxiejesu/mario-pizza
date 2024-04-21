@@ -1,4 +1,4 @@
-import Order_line from "../models/order_line";
+import Order_line from "../models/OrderLine";
 import AuthenticationService from "./AuthenticationService";
 
 class Order_lineService {

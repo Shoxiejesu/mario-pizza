@@ -12,6 +12,7 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
   const [usersLastname, setUsersLastname] = useState("");
   const [usersAddress, setUsersAddress] = useState("");
 
+  
   const handleSaveUsers = async () => {
     try {
       // Vérifier si toutes les informations sont remplies
