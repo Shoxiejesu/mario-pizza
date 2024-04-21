@@ -34,7 +34,7 @@ const App = () => {
         ) : (
           <Login
           setIsAuthenticated={setIsAuthenticated}
-          onRegisterClick={() => navigate("/RegisterPage")} // Redirection vers la page d'inscription
+          onRegisterClick={() => navigate("/RegisterPage")} 
         />
         
         )}

@@ -20,10 +20,7 @@ const PizzaListPage: React.FC = () => {
   const [cart, setCart] = useState<number>(0);
   const [showCartDetails, setShowCartDetails] = useState<boolean>(false);
   const [userId, setUserId] = useState<number | null>(null); 
-  const [orderIdCounter, setOrderIdCounter] = useState<number>(() => {
-    const storedOrderIdCounter = localStorage.getItem("orderIdCounter");
-    return storedOrderIdCounter ? parseInt(storedOrderIdCounter) : 1;
-  });
+
 
   useEffect(() => {
     async function fetchPizzas() {
@@ -38,15 +35,7 @@ const PizzaListPage: React.FC = () => {
     fetchPizzas();
   }, []);
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
-    if (user && user.id) {
-      setUserId(user.id);
-    } else {
-      console.error("No user ID available.");
-    }
-  }, []);
-
+  
   const handleAddPizza = (index: number) => {
     const newSelectedPizzas = { ...selectedPizzas };
     newSelectedPizzas[index] = (newSelectedPizzas[index] || 0) + 1;
@@ -64,6 +53,10 @@ const PizzaListPage: React.FC = () => {
     if (newSelectedPizzas[index] && newSelectedPizzas[index] > 0) {
       newSelectedPizzas[index]--;
       setSelectedPizzas(newSelectedPizzas);
+    }
+
+    if (newSelectedPizzas[index] === 0) {
+      delete newSelectedPizzas[index];
     }
 
     let total = 0;
@@ -106,9 +99,6 @@ const PizzaListPage: React.FC = () => {
       // Gérer les erreurs d'enregistrement de la commande
       console.error("Erreur lors de l'enregistrement de la commande :", error);
   
-      // Réinitialiser le panier en cas d'erreur
-      setSelectedPizzas({});
-      setCart(0);
   
       // Afficher un message d'erreur
       alert("Erreur lors de l'enregistrement de la commande. Veuillez réessayer.");
