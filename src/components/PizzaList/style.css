@@ -155,3 +155,45 @@ body {
 .show-cart-details {
   opacity: 1; /* Lorsque la classe show-cart-details est ajoutée, le détail du panier devient visible */
 }
+
+.button-icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.button-icon:hover {
+  background-color: #f0f0f0;
+}
+
+.minus {
+  color: #ff6347; /* Red color for minus button */
+}
+
+.plus {
+  color: #32cd32; /* Green color for plus button */
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.button-icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0 5px; /* Adjust this value for spacing between buttons */
+}
+
+.button-icon:hover {
+  background-color: #f0f0f0;
+}
+
+.minus {
+  color: #ff6347; /* Red color for minus button */
+}
+
+.plus {
+  color: #32cd32; /* Green color for plus button */
+}

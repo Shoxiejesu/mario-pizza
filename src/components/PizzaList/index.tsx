@@ -153,7 +153,6 @@ const PizzaListPage: React.FC = () => {
                   alt={t("pizza." + pizza.id)}
                   style={{ width: 200, marginRight: "1em" }}
                 />
-                      <span style={{ marginRight: "1em" }}>{index + 1}</span>
 
                 <Box
                   display="flex"
@@ -177,23 +176,25 @@ const PizzaListPage: React.FC = () => {
                     <Typography className="pizza-price">
                       {pizza.price + " €"}
                     </Typography>
+
+                    <div className="quantity-controls">
+
                     <IconButton
-                      onClick={() => handleAddPizza(index)}
-                      className="button-icon"
-                    >
-                      <button className="button" type="button">
-                        +
-                      </button>
-                    </IconButton>
+  onClick={() => handleRemovePizza(index)}
+  className="button-icon minus"
+>
+  -
+</IconButton>
+                    
                     <Typography>{selectedPizzas[index] || 0}</Typography>
                     <IconButton
-                      onClick={() => handleRemovePizza(index)}
-                      className="button-icon"
-                    >
-                      <button className="button" type="button">
-                        -
-                      </button>
-                    </IconButton>
+  onClick={() => handleAddPizza(index)}
+  className="button-icon plus"
+>
+  +
+</IconButton>
+</div>
+
                   </Box>
                 </Box>
               </div>
