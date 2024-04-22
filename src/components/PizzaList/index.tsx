@@ -14,9 +14,12 @@ import Order_line from "../../models/OrderLine";
 
 const PizzaListPage: React.FC = () => {
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
+
   const [selectedPizzas, setSelectedPizzas] = useState<{
     [key: number]: number;
   }>({});
+  
+  
   const [cart, setCart] = useState<number>(0);
   const [showCartDetails, setShowCartDetails] = useState<boolean>(false);
   const [userId, setUserId] = useState<number | null>(null); 
@@ -37,7 +40,9 @@ const PizzaListPage: React.FC = () => {
 
   
   const handleAddPizza = (index: number) => {
+    
     const newSelectedPizzas = { ...selectedPizzas };
+
     newSelectedPizzas[index] = (newSelectedPizzas[index] || 0) + 1;
     setSelectedPizzas(newSelectedPizzas);
 
@@ -74,7 +79,7 @@ const PizzaListPage: React.FC = () => {
     try {
       const orderLines = Object.entries(selectedPizzas).map(([pizzaIndex, quantity]) => {
         return {
-          piz_id: parseInt(pizzaIndex),
+          piz_id: parseInt(pizzaIndex+1),
           quantity: quantity
         };
       });
@@ -148,6 +153,8 @@ const PizzaListPage: React.FC = () => {
                   alt={t("pizza." + pizza.id)}
                   style={{ width: 200, marginRight: "1em" }}
                 />
+                      <span style={{ marginRight: "1em" }}>{index + 1}</span>
+
                 <Box
                   display="flex"
                   flexDirection="column"
