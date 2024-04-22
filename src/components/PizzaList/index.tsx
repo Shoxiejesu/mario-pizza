@@ -79,7 +79,7 @@ const PizzaListPage: React.FC = () => {
     try {
       const orderLines = Object.entries(selectedPizzas).map(([pizzaIndex, quantity]) => {
         return {
-          piz_id: parseInt(pizzaIndex+1),
+          piz_id: parseInt(pizzaIndex)+1,
           quantity: quantity
         };
       });
