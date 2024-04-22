@@ -7,10 +7,7 @@ import Pizza from "../../models/pizza";
 import { t } from "i18next";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import OrderService from "../../services/OrderService";
-import Order from "../../models/order";
 
-import Order_lineService from "../../services/Order_lineService";
-import Order_line from "../../models/OrderLine";
 
 const PizzaListPage: React.FC = () => {
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
@@ -18,12 +15,10 @@ const PizzaListPage: React.FC = () => {
   const [selectedPizzas, setSelectedPizzas] = useState<{
     [key: number]: number;
   }>({});
-  
-  
+
   const [cart, setCart] = useState<number>(0);
   const [showCartDetails, setShowCartDetails] = useState<boolean>(false);
-  const [userId, setUserId] = useState<number | null>(null); 
-
+  const [userId, setUserId] = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchPizzas() {
@@ -38,9 +33,7 @@ const PizzaListPage: React.FC = () => {
     fetchPizzas();
   }, []);
 
-  
   const handleAddPizza = (index: number) => {
-    
     const newSelectedPizzas = { ...selectedPizzas };
 
     newSelectedPizzas[index] = (newSelectedPizzas[index] || 0) + 1;
@@ -77,39 +70,37 @@ const PizzaListPage: React.FC = () => {
 
   const handleSaveOrder = async () => {
     try {
-      const orderLines = Object.entries(selectedPizzas).map(([pizzaIndex, quantity]) => {
-        return {
-          piz_id: parseInt(pizzaIndex)+1,
-          quantity: quantity
-        };
-      });
-  
+      const orderLines = Object.entries(selectedPizzas).map(
+        ([pizzaIndex, quantity]) => {
+          return {
+            piz_id: parseInt(pizzaIndex) + 1,
+            quantity: quantity,
+          };
+        }
+      );
+
       const orderData = {
         total_amount: totalPrice.toFixed(2),
-        orderLines: orderLines
+        orderLines: orderLines,
       };
-  
-      // Enregistrer la commande et les lignes de commande
+
       console.log("Order before saving:", orderData);
       const savedOrder = await OrderService.save(orderData);
       console.log("Saved order:", savedOrder);
-  
+
       // Réinitialiser le panier après avoir enregistré la commande
       setSelectedPizzas({});
       setCart(0);
-  
-      // Afficher un message de succès
+
       alert("Commande enregistrée avec succès ! 30 minutes de délai d'attente");
     } catch (error) {
-      // Gérer les erreurs d'enregistrement de la commande
       console.error("Erreur lors de l'enregistrement de la commande :", error);
-  
-  
-      // Afficher un message d'erreur
-      alert("Erreur lors de l'enregistrement de la commande. Veuillez réessayer.");
+
+      alert(
+        "Erreur lors de l'enregistrement de la commande. Veuillez réessayer."
+      );
     }
   };
-  
 
   const totalPrice = Object.entries(selectedPizzas).reduce(
     (acc, [index, quantity]) => {
@@ -178,23 +169,21 @@ const PizzaListPage: React.FC = () => {
                     </Typography>
 
                     <div className="quantity-controls">
+                      <IconButton
+                        onClick={() => handleRemovePizza(index)}
+                        className="button-icon minus"
+                      >
+                        -
+                      </IconButton>
 
-                    <IconButton
-  onClick={() => handleRemovePizza(index)}
-  className="button-icon minus"
->
-  -
-</IconButton>
-                    
-                    <Typography>{selectedPizzas[index] || 0}</Typography>
-                    <IconButton
-  onClick={() => handleAddPizza(index)}
-  className="button-icon plus"
->
-  +
-</IconButton>
-</div>
-
+                      <Typography>{selectedPizzas[index] || 0}</Typography>
+                      <IconButton
+                        onClick={() => handleAddPizza(index)}
+                        className="button-icon plus"
+                      >
+                        +
+                      </IconButton>
+                    </div>
                   </Box>
                 </Box>
               </div>
