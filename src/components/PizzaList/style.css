@@ -211,3 +211,17 @@ body {
 
 
 
+.button {
+  background-color: transparent;
+  color: green;
+  padding: 5px 10px;
+  border: 2px solid green;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+  background-color: green;
+  color: white;
+}

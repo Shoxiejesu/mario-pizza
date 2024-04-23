@@ -10,11 +10,15 @@
     "firstnamePlaceholder": "PRENOM",
     "lastnamePlaceholder": "NOM",
     "addressPlaceholder": "ADRESSE",
-    "register": "créer un compte"
+    "register": "créer un compte",
+    "detailsPanier": "Détails du panier",
+    "validerCommande": "Valider la commande",
+    "prixTotal": "Prix total"
 
 
+    
 
-
+    
     
   },
  

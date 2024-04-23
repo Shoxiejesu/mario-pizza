@@ -10,7 +10,12 @@
     "firstnamePlaceholder": "VOORNAAM",
     "lastnamePlaceholder": "NAAM",
     "addressPlaceholder": "ADRES",
-    "registervalide": "Register"
+    "registervalide": "Register",
+    "detailsPanier": "Winkelwagengegevens",
+    "validerCommande": "Valideer de bestelling",
+    "prixTotal": "Totale prijs"
+
+
 
 
 

@@ -73,16 +73,23 @@ const PizzaListPage: React.FC = () => {
   const handleSaveOrder = async () => {
     try {
       // On convertit en tableau les info de selectedPizza
-
+      if (totalPrice <= 0) {
+        throw new Error('Le prix total de la commande doit être supérieur à 0.');
+      }
       const orderLines = Object.entries(selectedPizzas).map(
         ([pizzaIndex, quantity]) => {
+          if (quantity > 0) {
+
           return {
             // Corrige le bug de decalage de l'id Pizza qui commencer a 0 au lieu de 1
 
             piz_id: parseInt(pizzaIndex) + 1,
             quantity: quantity,
           };
+        }        else {
+          throw new Error('La quantité de pizza doit être supérieure à 0.');
         }
+      }
       );
 
       const orderData = {
@@ -127,7 +134,7 @@ const PizzaListPage: React.FC = () => {
       <div
         className={`cart-details ${showCartDetails ? "show-cart-details" : ""}`}
       >
-        <Typography variant="h4">Détails du panier</Typography>
+        <Typography variant="h4">{t("common.detailsPanier")}</Typography>
         {}
         {Object.entries(selectedPizzas).map(([index, quantity]) => (
           <div key={index}>
@@ -137,9 +144,20 @@ const PizzaListPage: React.FC = () => {
           </div>
         ))}
         <Typography variant="h4">
-          Prix total: {totalPrice.toFixed(2)} €
+          {t("common.prixTotal")}: {totalPrice.toFixed(2)} €
         </Typography>
-        <button onClick={handleSaveOrder}>Valider la commande</button>
+        <button
+          onClick={handleSaveOrder}
+          style={{
+            backgroundColor: "green",
+            color: "white",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            border: "none",
+          }}
+        >
+          &#10003; {t("common.validerCommande")}
+        </button>{" "}
       </div>
 
       {pizzas.length > 0 ? (
