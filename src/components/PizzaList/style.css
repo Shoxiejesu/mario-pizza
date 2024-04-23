@@ -14,6 +14,8 @@ body {
   border-radius: 5px;
   background-color: #ffffff;
   transition: border-width 0.3s ease;
+  transition: all 0.3s ease; /* Add transition for smooth effect */
+
 }
 
 .pizza-info {
@@ -51,6 +53,7 @@ body {
   text-decoration: none;
 }
 
+/* Pizza */
 .pizza-item:hover {
   border-width: 2px;
 }
@@ -67,6 +70,13 @@ body {
 .pizza-price span {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.pizza-item:hover {
+  border-width: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
+  transform: scale(1.05); /* Zoom effect */
+}
+
 
 .container {
   display: flex;
@@ -139,21 +149,21 @@ body {
 }
 
 .cart-details {
-  font-size: 12px; /* Définir la taille de la police pour les détails du panier */
+  font-size: 12px; 
 }
 
 .cart-details h4 {
-  font-size: 19px; /* Définir la taille de la police pour les titres h4 */
+  font-size: 19px; 
 }
 
 
 .cart-details {
-  opacity: 0; /* Par défaut, le détail du panier est invisible */
-  transition: opacity 0.3s ease; /* Ajoute une transition pour l'opacité */
+  opacity: 0; 
+  transition: opacity 0.3s ease; 
 }
 
 .show-cart-details {
-  opacity: 1; /* Lorsque la classe show-cart-details est ajoutée, le détail du panier devient visible */
+  opacity: 1; 
 }
 
 .button-icon {
@@ -167,11 +177,11 @@ body {
 }
 
 .minus {
-  color: #ff6347; /* Red color for minus button */
+  color: #ff6347; 
 }
 
 .plus {
-  color: #32cd32; /* Green color for plus button */
+  color: #32cd32; 
 }
 .quantity-controls {
   display: flex;
@@ -183,7 +193,7 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin: 0 5px; /* Adjust this value for spacing between buttons */
+  margin: 0 5px;
 }
 
 .button-icon:hover {
@@ -191,9 +201,13 @@ body {
 }
 
 .minus {
-  color: #ff6347; /* Red color for minus button */
+  color: #ff6347;
 }
 
 .plus {
-  color: #32cd32; /* Green color for plus button */
+  color: #32cd32; 
 }
+
+
+
+

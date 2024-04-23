@@ -8,7 +8,6 @@ import { t } from "i18next";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import OrderService from "../../services/OrderService";
 
-
 const PizzaListPage: React.FC = () => {
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
 
@@ -36,14 +35,17 @@ const PizzaListPage: React.FC = () => {
   const handleAddPizza = (index: number) => {
     const newSelectedPizzas = { ...selectedPizzas };
 
-    newSelectedPizzas[index] = (newSelectedPizzas[index] || 0) + 1;
-    setSelectedPizzas(newSelectedPizzas);
+    // Limite de 10 par pizza
+    if ((newSelectedPizzas[index] || 0) < 10) {
+      newSelectedPizzas[index] = (newSelectedPizzas[index] || 0) + 1;
+      setSelectedPizzas(newSelectedPizzas);
 
-    let total = 0;
-    Object.values(newSelectedPizzas).forEach((quantity) => {
-      total += quantity;
-    });
-    setCart(total);
+      let total = 0;
+      Object.values(newSelectedPizzas).forEach((quantity) => {
+        total += quantity;
+      });
+      setCart(total);
+    }
   };
 
   const handleRemovePizza = (index: number) => {
@@ -70,9 +72,13 @@ const PizzaListPage: React.FC = () => {
 
   const handleSaveOrder = async () => {
     try {
+      // On convertit en tableau les info de selectedPizza
+
       const orderLines = Object.entries(selectedPizzas).map(
         ([pizzaIndex, quantity]) => {
           return {
+            // Corrige le bug de decalage de l'id Pizza qui commencer a 0 au lieu de 1
+
             piz_id: parseInt(pizzaIndex) + 1,
             quantity: quantity,
           };
@@ -88,7 +94,7 @@ const PizzaListPage: React.FC = () => {
       const savedOrder = await OrderService.save(orderData);
       console.log("Saved order:", savedOrder);
 
-      // Réinitialiser le panier après avoir enregistré la commande
+      // Retour a 0 du panier une fois la commande validé
       setSelectedPizzas({});
       setCart(0);
 
@@ -104,7 +110,9 @@ const PizzaListPage: React.FC = () => {
 
   const totalPrice = Object.entries(selectedPizzas).reduce(
     (acc, [index, quantity]) => {
+      // on recup la pizza en fonction de son id
       const pizza = pizzas[parseInt(index)];
+      // calcule prix de la pizza en fonction de la quantité et on l'ajoute au total du panier
       return acc + pizza.price * quantity;
     },
     0
