@@ -85,23 +85,21 @@ export default class AuthenticationService {
         if (response.ok) {
           const signupResponse: SignupResponse | null = await response.json();
           if (signupResponse) {
-            // Enregistrement des données dans le local storage
             localStorage.setItem("jwt", signupResponse.jwt);
             localStorage.setItem("expiration", signupResponse.expiration);
             localStorage.setItem("refreshToken", signupResponse.refreshToken);
             localStorage.setItem("user", JSON.stringify(signupResponse.user));
             
-            return signupResponse; // Retourne l'objet SignupResponse en cas de succès
+            return signupResponse; 
           }
         } else {
           throw new Error("Failed to sign up");
         }
       } catch (error) {
         console.error("Signup error:", error);
-        return null; // Retourne null en cas d'échec
+        return null; 
       }
     
-      // Déclaration de retour finale en cas d'échec
       return null;
     }
     
