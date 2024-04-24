@@ -26,6 +26,7 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
         alert("Veuillez remplir toutes les informations pour créer un compte.");
         return;
       }
+      
 
       const newUser = {
         username: usersUsername,
@@ -41,7 +42,9 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
       if (response) {
         // Succès de l'inscription
         alert("Inscription réussie! Vous allez être redirigé vers la liste des pizzas.");
+
         window.location.href = "/PizzaListPage";
+
       } else {
         // Échec de l'inscription
         alert("Une erreur s'est produite lors de l'inscription.");

@@ -1,48 +1,43 @@
-
 .AppBar {
   background-color: #3b438b;
-  color: white; 
-  height: 60px; 
-  padding: 0 20px; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-}
-
-
-.logo {
-  max-width: 90px; 
-  height: auto;
-}
-
-
-
-
-
-
-.menu {
-  margin-left: auto; 
-  display: flex; 
+  color: white;
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
+.logo {
+  max-width: 90px;
+  height: auto;
+}
+
+.menu {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
 
 .ToggleButtonGroup {
-  margin-right: 10px; 
-  color: white; 
+  margin-right: 10px;
+  color: white;
   border-color: white;
 }
 
 .LogoutButton {
-  color: white; 
+  color: white;
 }
-
 
 .Avatar {
-  margin-left: 10px; 
+  margin-left: 10px;
 }
-
 
 .NavLink {
   text-decoration: none;
+}
+
+.text-3d {
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 #000, 6px 6px 0 #000;
+  transform: perspective(200px) rotateX(10deg);
 }

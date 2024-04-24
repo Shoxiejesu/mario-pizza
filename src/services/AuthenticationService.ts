@@ -72,6 +72,8 @@ export default class AuthenticationService {
       const userString = localStorage.getItem("user");
       return userString ? JSON.parse(userString) : null;
     }
+
+
     static async signup(signupData: SignupRequest): Promise<SignupResponse | null> {
       try {
         const response = await fetch("http://localhost:8080/auth/signup", {
@@ -79,16 +81,30 @@ export default class AuthenticationService {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(signupData),
         });
-  
+    
         if (response.ok) {
-          return await response.json();
+          const signupResponse: SignupResponse | null = await response.json();
+          if (signupResponse) {
+            // Enregistrement des données dans le local storage
+            localStorage.setItem("jwt", signupResponse.jwt);
+            localStorage.setItem("expiration", signupResponse.expiration);
+            localStorage.setItem("refreshToken", signupResponse.refreshToken);
+            localStorage.setItem("user", JSON.stringify(signupResponse.user));
+            
+            return signupResponse; // Retourne l'objet SignupResponse en cas de succès
+          }
         } else {
           throw new Error("Failed to sign up");
         }
       } catch (error) {
         console.error("Signup error:", error);
-        return null;
+        return null; // Retourne null en cas d'échec
       }
-}
+    
+      // Déclaration de retour finale en cas d'échec
+      return null;
+    }
+    
+
 }
 

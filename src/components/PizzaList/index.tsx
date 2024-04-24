@@ -131,9 +131,8 @@ const PizzaListPage: React.FC = () => {
         <ShoppingCartIcon />
       </IconButton>
 
-      <div
-        className={`cart-details ${showCartDetails ? "show-cart-details" : ""}`}
-      >
+      <div className={`cart-details ${showCartDetails ? "show-cart-details" : ""}`}>
+
         <Typography variant="h4">{t("common.detailsPanier")}</Typography>
         {}
         {Object.entries(selectedPizzas).map(([index, quantity]) => (
@@ -155,11 +154,17 @@ const PizzaListPage: React.FC = () => {
             borderRadius: "5px",
             border: "none",
           }}
+          onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => { 
+            (e.target as HTMLButtonElement).style.backgroundColor = "lightgreen";
+          }} 
+          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => { 
+            (e.target as HTMLButtonElement).style.backgroundColor = "green";
+          }} 
         >
           &#10003; {t("common.validerCommande")}
         </button>{" "}
       </div>
-
+      <Typography variant="h4" gutterBottom className="left-align">{t("common.choose")}</Typography> {}
       {pizzas.length > 0 ? (
         <ul className="pizza-list">
           {pizzas.map((pizza, index) => (

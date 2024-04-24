@@ -42,7 +42,12 @@ const Header = ({ isAuthenticated, setIsAuthenticated }: Props) => {
           <img src="logo.png" alt="Logo" className="logo" />
         </Box>
 
-        <Box display="flex" justifyContent="center" alignItems="center">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          className="text-3d"
+        >
           <Typography
             variant="h2"
             sx={{
